@@ -3,7 +3,7 @@ entry start
 include 'win32a.inc'
 
 section '.data' data readable writable
-        ; Строки для консоли
+        ; Strings for console
         strSize db 'Enter size of array: ', 0
         strEl   db 'Enter %d element of array: ', 10, 0
 
@@ -12,11 +12,11 @@ section '.data' data readable writable
         size    Rw 1
         temp    Rw 1
 
-        ; Объявление элементов массива
+        ; Array elements
         str0    db 'Array0', 0
         str1    db 'Array1', 0
 
-        ; Объявление массива
+        ; Array
         array   rd 4
 
         NULL = 0
@@ -55,11 +55,11 @@ section '.code' code readable executable
         start:
                 jmp input
 
-                ; Заполнение массива
+                ; Array initialization
                 mov     [array], str0
                 mov     [array + 4], str1
 
-                ; Вывод 2-го по счёту элемента
+                ; Output second element
                 push    [array + 4]
                 call    [printf]
 
