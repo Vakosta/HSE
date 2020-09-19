@@ -3,14 +3,71 @@ entry start
 include 'win32a.inc'
 
 section '.data' data readable writable
+        ; Строки для консоли
+        strSize db 'Enter size of array: ', 0
+        strEl   db 'Enter %d element of array: ', 10, 0
+
+        fSize   db '%d', 0
+
+        size    Rw 1
+        temp    Rw 1
+
+        ; Объявление элементов массива
+        str0    db 'Array0', 0
+        str1    db 'Array1', 0
+
+        ; Объявление массива
+        array   rd 4
+
         NULL = 0
 
+
 section '.code' code readable executable
-        start:
+        input:
+                push strSize
+                call [printf]
+
+                push size
+                push fSize
+                call [scanf]
+
+                mov cx, [size]
+                mov ax, 0
+                add_element:
+                        inc ax
+                        mov [temp], ax
+
+                        push [temp]
+                        push strEl
+                        call [printf]
+
+                        loop add_element
+
                 call [getch]
 
                 push NULL
                 call [ExitProcess]
+
+        output:
+
+        process:
+
+        start:
+                jmp input
+
+                ; Заполнение массива
+                mov     [array], str0
+                mov     [array + 4], str1
+
+                ; Вывод 2-го по счёту элемента
+                push    [array + 4]
+                call    [printf]
+
+                call    [getch]
+
+                push    NULL
+                call    [ExitProcess]
+
 
 section '.idata' import data readable
         library kernel, 'kernel32.dll',\
