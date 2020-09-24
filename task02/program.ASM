@@ -32,14 +32,16 @@ section '.code' code readable executable
                 call [scanf]
 
                 mov cx, [size]
-                mov ax, 0
+                mov eax, 0
                 add_element:
-                        inc ax
-                        mov [temp], ax
 
-                        push [temp]
+                        push eax
                         push strEl
                         call [printf]
+                        pop eax
+                        pop eax
+
+                        call [getch]
 
                         loop add_element
 
