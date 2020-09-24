@@ -6,7 +6,7 @@ section '.data' data readable writable
         ; Strings for console
         strSize           db 'Enter size of array: ', 0
         strEl             db 'Enter %d element of array: ', 0
-        strInputDone      db 'Array input done.', 0
+        strInputDone      db 'Array input done.', 10, 0
 
         fNumber db '%d', 0
 
@@ -83,16 +83,6 @@ section '.code' code readable executable
 
         start:
                 jmp input
-
-                ; Array initialization
-                mov     [array], str0
-                mov     [array + 4], str1
-
-                ; Output second element
-                push    [array + 4]
-                call    [printf]
-
-                call    [getch]
 
                 push    NULL
                 call    [ExitProcess]
