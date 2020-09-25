@@ -24,6 +24,8 @@ section '.data' data readable writable
         NULL = 0
 
 
+
+
 section '.code' code readable executable
         input:             push    strSize
                            call    [printf]
@@ -72,6 +74,8 @@ section '.code' code readable executable
                            push    NULL
                            call    [ExitProcess]
 
+
+
         process:           mov     ecx, [size]
                            mov     [r_count], ecx
 
@@ -103,6 +107,8 @@ section '.code' code readable executable
                            mov     [r_count], ecx
                            jecxz   output
                            jmp     process_iteration
+
+
 
         output:            mov     ecx, [size]
                            mov     [r_count], ecx
@@ -137,6 +143,8 @@ section '.code' code readable executable
                            call    [ExitProcess]
 
         start:             jmp     input
+
+
 
 
 section '.idata' import data readable
