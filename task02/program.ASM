@@ -4,21 +4,19 @@ include 'win32a.inc'
 
 section '.data' data readable writable
         ; Strings for console
-        strSize            db 'Enter size of array: ', 0
-        strEl              db 'Enter %d element of array: ', 0
-        strInputDone       db 'Array input done.', 10, 10, 0
-        strCurEl           db 'The %d element is: %d', 10, 0
-        strAnyKey          db 'Press any button.', 0
+        str_el              db 'Enter %d element of array: ', 0
+        str_size            db 'Enter size of array: ', 0
+        str_cur_el           db 'The %d element is: %d', 10, 0
+        str_any_key          db 'Press any button.', 0
+        str_input_done       db 'Array input done.', 10, 10, 0
 
+        f_number            db '%d', 0
 
-        fNumber            db '%d', 0
-
-        size               rd 1
-        element            rd 1
         temp               Rw 1
-        counter            rd 1
-        r_count            rd 1
+        size               rd 1
         index              rd 1
+        element            rd 1
+        r_count            rd 1
 
         ; Array
         array              rd 200
@@ -29,27 +27,23 @@ section '.data' data readable writable
 
 
 section '.code' code readable executable
-        input:             push    strSize
+        input:             push    str_size
                            call    [printf]
 
                            push    size
-                           push    fNumber
+                           push    f_number
                            call    [scanf]
 
                            mov     ecx, [size]
                            mov     [r_count], ecx
-                           mov     eax, 0
+                           xor     eax, eax
 
-        add_element:       mov     eax, [counter]
-                           inc     eax
-                           mov     [counter], eax
-
-                           push    eax
-                           push    strEl
+        add_element:       push    eax
+                           push    str_el
                            call    [printf]
 
                            push    element
-                           push    fNumber
+                           push    f_number
                            call    [scanf]
 
                            mov     ebx, [element]
@@ -66,7 +60,7 @@ section '.code' code readable executable
 
                            jmp     add_element
 
-        input_end:         push    strInputDone
+        input_end:         push    str_input_done
                            call    [printf]
 
                            call    [getch]
@@ -81,7 +75,6 @@ section '.code' code readable executable
         process:           mov     ecx, [size]
                            mov     [r_count], ecx
 
-                           mov     [counter], 0
                            mov     [index], 0
 
         process_iteration: mov     eax, [index]
@@ -91,7 +84,7 @@ section '.code' code readable executable
                            mov     [array + eax*4], -1
                            jmp     end_process
 
-        more_or_equal:     mov     ecx, 0
+        more_or_equal:     xor     ecx, ecx
                            cmp     ecx, [array + eax*4]
                            jge     equal
 
@@ -115,18 +108,13 @@ section '.code' code readable executable
         output:            mov     ecx, [size]
                            mov     [r_count], ecx
 
-                           mov     [counter], 0
                            mov     [index], 0
 
-        output_element:    mov     eax, [counter]
-                           inc     eax
-                           mov     [counter], eax
-
-                           mov     eax, [index]
+        output_element:    mov     eax, [index]
 
                            push    [array + eax*4]
-                           push    [counter]
-                           push    strCurEl
+                           push    eax
+                           push    str_cur_el
                            call    [printf]
 
                            mov     eax, [index]
@@ -139,13 +127,15 @@ section '.code' code readable executable
                            jecxz   output_end
                            jmp     output_element
 
-        output_end:        push    strAnyKey
+        output_end:        push    str_any_key
                            call    [printf]
 
                            call    [getch]
 
                            push    NULL
                            call    [ExitProcess]
+
+
 
         start:             jmp     input
 
