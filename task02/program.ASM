@@ -4,22 +4,24 @@ include 'win32a.inc'
 
 section '.data' data readable writable
         ; Strings for console
-        strSize           db 'Enter size of array: ', 0
-        strEl             db 'Enter %d element of array: ', 0
-        strInputDone      db 'Array input done.', 10, 0
-        strCurEl          db 'The %d element is: %d', 10, 0
+        strSize            db 'Enter size of array: ', 0
+        strEl              db 'Enter %d element of array: ', 0
+        strInputDone       db 'Array input done.', 10, 10, 0
+        strCurEl           db 'The %d element is: %d', 10, 0
+        strAnyKey          db 'Press any button.', 0
 
-        fNumber           db '%d', 0
 
-        size              rd 1
-        element           rd 1
-        temp              Rw 1
-        counter           rd 1
-        r_count           rd 1
-        index             rd 1
+        fNumber            db '%d', 0
+
+        size               rd 1
+        element            rd 1
+        temp               Rw 1
+        counter            rd 1
+        r_count            rd 1
+        index              rd 1
 
         ; Array
-        array             rd 200
+        array              rd 200
 
         NULL = 0
 
@@ -137,7 +139,10 @@ section '.code' code readable executable
                            jecxz   output_end
                            jmp     output_element
 
-        output_end:        call    [getch]
+        output_end:        push    strAnyKey
+                           call    [printf]
+
+                           call    [getch]
 
                            push    NULL
                            call    [ExitProcess]
@@ -148,13 +153,13 @@ section '.code' code readable executable
 
 
 section '.idata' import data readable
-        library kernel, 'kernel32.dll',\
-                msvcrt, 'msvcrt.dll'
+        library            kernel, 'kernel32.dll',\
+                           msvcrt, 'msvcrt.dll'
 
-        import kernel,\
-               ExitProcess, 'ExitProcess'
+        import             kernel,\
+                           ExitProcess, 'ExitProcess'
 
-        import msvcrt,\
-               printf, 'printf',\
-               getch, '_getch',\
-               scanf, 'scanf'
+        import             msvcrt,\
+                           printf, 'printf',\
+                           getch, '_getch',\
+                           scanf, 'scanf'
