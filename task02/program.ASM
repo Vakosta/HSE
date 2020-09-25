@@ -70,10 +70,47 @@ section '.code' code readable executable
 
                 call    [getch]
 
-                jmp     output
+                jmp     process
 
                 push    NULL
                 call    [ExitProcess]
+
+        process:
+                mov ecx, [size]
+                mov [r_count], ecx
+
+                mov [counter], 0
+                mov [index], 0
+
+                process_iteration:
+                        mov     eax, [index]
+                        cmp     [array + eax*4], 0
+                        jge     more_or_equal
+
+                        mov     [array + eax*4], -1
+                        jmp     end_process
+
+                more_or_equal:
+                        mov     ecx, 0
+                        cmp     ecx, [array + eax*4]
+                        jge     equal
+
+                        mov     [array + eax*4], 1
+                        jmp     end_process
+
+                equal:
+                        mov     [array + eax*4], 0
+                        jmp     end_process
+
+                end_process:
+                        inc     eax
+                        mov     [index], eax
+
+                        mov     ecx, [r_count]
+                        dec     ecx
+                        mov     [r_count], ecx
+                        jecxz   output
+                        jmp process_iteration
 
         output:
                 mov ecx, [size]
@@ -109,8 +146,6 @@ section '.code' code readable executable
 
                 push    NULL
                 call    [ExitProcess]
-
-        process:
 
         start:
                 jmp     input
