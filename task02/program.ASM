@@ -7,22 +7,19 @@ section '.data' data readable writable
         strSize           db 'Enter size of array: ', 0
         strEl             db 'Enter %d element of array: ', 0
         strInputDone      db 'Array input done.', 10, 0
+        strCurEl          db 'The %d element is: %d', 10, 0
 
-        fNumber db '%d', 0
+        fNumber           db '%d', 0
 
-        size    rd 1
-        element Rw 1
-        temp    Rw 1
-        counter rd 1
-        r_count rd 1
-        index   rd 1
-
-        ; Array elements
-        str0    db 'Array0', 0
-        str1    db 'Array1', 0
+        size              rd 1
+        element           rd 1
+        temp              Rw 1
+        counter           rd 1
+        r_count           rd 1
+        index             rd 1
 
         ; Array
-        array   rd 200
+        array             rd 200
 
         NULL = 0
 
@@ -39,50 +36,84 @@ section '.code' code readable executable
                 mov ecx, [size]
                 mov [r_count], ecx
                 mov eax, 0
+
                 add_element:
-                        mov eax, [counter]
-                        inc eax
-                        mov [counter], eax
+                        mov     eax, [counter]
+                        inc     eax
+                        mov     [counter], eax
 
-                        push eax
-                        push strEl
-                        call [printf]
+                        push    eax
+                        push    strEl
+                        call    [printf]
 
-                        push element
-                        push fNumber
-                        call [scanf]
+                        push    element
+                        push    fNumber
+                        call    [scanf]
 
-                        mov eax, [index]
-                        mov [array + eax], element
+                        mov     ebx, [element]
+                        mov     eax, [index]
+                        mov     [array + eax*4], ebx
 
-                        inc eax
-                        inc eax
-                        inc eax
-                        inc eax
-                        mov [index], eax
+                        inc     eax
+                        mov     [index], eax
 
-                        mov ecx, [r_count]
-                        dec ecx
-                        mov [r_count], ecx
-                        jecxz input_end
+                        mov     ecx, [r_count]
+                        dec     ecx
+                        mov     [r_count], ecx
+                        jecxz   input_end
 
                         jmp add_element
 
         input_end:
-                push strInputDone
-                call [printf]
+                push    strInputDone
+                call    [printf]
 
-                call [getch]
+                call    [getch]
 
-                push NULL
-                call [ExitProcess]
+                jmp     output
+
+                push    NULL
+                call    [ExitProcess]
 
         output:
+                mov ecx, [size]
+                mov [r_count], ecx
+
+                mov [counter], 0
+                mov [index], 0
+
+                output_element:
+                        mov     eax, [counter]
+                        inc     eax
+                        mov     [counter], eax
+
+                        mov     eax, [index]
+
+                        push    [array + eax*4]
+                        push    [counter]
+                        push    strCurEl
+                        call    [printf]
+
+                        mov     eax, [index]
+                        inc     eax
+                        mov     [index], eax
+
+                        mov     ecx, [r_count]
+                        dec     ecx
+                        mov     [r_count], ecx
+                        jecxz   output_end
+                        jmp     output_element
+
+        output_end:
+                call    [getch]
+
+                push    NULL
+                call    [ExitProcess]
 
         process:
 
         start:
-                jmp input
+                jmp     input
 
                 push    NULL
                 call    [ExitProcess]
