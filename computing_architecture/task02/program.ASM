@@ -4,13 +4,13 @@ include 'win32a.inc'
 
 section '.data' data readable writable
         ; Strings for console
-        str_el              db 'Enter %d element of array: ', 0
-        str_size            db 'Enter size of array: ', 0
-        str_cur_el           db 'The %d element is: %d', 10, 0
-        str_any_key          db 'Press any button.', 0
-        str_input_done       db 'Array input done.', 10, 10, 0
+        str_el             db 'Enter %d element of array: ', 0
+        str_size           db 'Enter size of array: ', 0
+        str_cur_el         db 'The %d element is: %d', 10, 0
+        str_any_key        db 'Press any button.', 0
+        str_input_done     db 'Array input done.', 10, 10, 0
 
-        f_number            db '%d', 0
+        f_number           db '%d', 0
 
         temp               Rw 1
         size               rd 1
