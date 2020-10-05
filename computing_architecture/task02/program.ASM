@@ -24,53 +24,15 @@ section '.data' data readable writable
         NULL = 0
 
 
+;----------------------------------------------------------------
 
 
 section '.code' code readable executable
-        input:             push    str_size
-                           call    [printf]
+        start:             call    input
+                           call    process
+                           call    output
 
-                           push    size
-                           push    f_number
-                           call    [scanf]
-
-                           mov     ecx, [size]
-                           mov     [r_count], ecx
-                           xor     eax, eax
-
-        add_element:       push    eax
-                           push    str_el
-                           call    [printf]
-
-                           push    element
-                           push    f_number
-                           call    [scanf]
-
-                           mov     ebx, [element]
-                           mov     eax, [index]
-                           mov     [array + eax*4], ebx
-
-                           inc     eax
-                           mov     [index], eax
-
-                           mov     ecx, [r_count]
-                           dec     ecx
-                           mov     [r_count], ecx
-                           jecxz   input_end
-
-                           jmp     add_element
-
-        input_end:         push    str_input_done
-                           call    [printf]
-
-                           call    [getch]
-
-                           jmp     process
-
-                           push    NULL
-                           call    [ExitProcess]
-
-
+;----------------------------------------------------------------
 
         process:           mov     ecx, [size]
                            mov     [r_count], ecx
@@ -103,7 +65,7 @@ section '.code' code readable executable
                            jecxz   output
                            jmp     process_iteration
 
-
+;----------------------------------------------------------------
 
         output:            mov     ecx, [size]
                            mov     [r_count], ecx
@@ -116,6 +78,7 @@ section '.code' code readable executable
                            push    eax
                            push    str_cur_el
                            call    [printf]
+                           add esp, 8
 
                            mov     eax, [index]
                            inc     eax
@@ -129,17 +92,60 @@ section '.code' code readable executable
 
         output_end:        push    str_any_key
                            call    [printf]
+                           add esp, 4
 
                            call    [getch]
 
-                           push    NULL
-                           call    [ExitProcess]
+                           ret
+
+;----------------------------------------------------------------
+
+        input:             push    str_size
+                           call    [printf]
+                           add esp, 4
+
+                           push    size
+                           push    f_number
+                           call    [scanf]
+                           add esp, 8
+
+                           mov     ecx, [size]
+                           mov     [r_count], ecx
+                           xor     eax, eax
+
+        add_element:       push    eax
+                           push    str_el
+                           call    [printf]
+                           add esp, 8
+
+                           push    element
+                           push    f_number
+                           call    [scanf]
+                           add esp, 8
+
+                           mov     ebx, [element]
+                           mov     eax, [index]
+                           mov     [array + eax*4], ebx
+
+                           inc     eax
+                           mov     [index], eax
+
+                           mov     ecx, [r_count]
+                           dec     ecx
+                           mov     [r_count], ecx
+                           jecxz   input_end
+
+                           jmp     add_element
+
+        input_end:         push    str_input_done
+                           call    [printf]
+                           add esp, 4
+
+                           call    [getch]
+                           ret
 
 
-
-        start:             jmp     input
-
-
+;----------------------------------------------------------------
 
 
 section '.idata' import data readable
