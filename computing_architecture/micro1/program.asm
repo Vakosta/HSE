@@ -52,7 +52,7 @@ section '.code' code readable executable
 
         process:                  inc   [counter]
 
-                                  xor   ecx, ecx.      ; Number1 and number2 sum.
+                                  xor   ecx, ecx       ; Number1 and number2 sum.
                                   add   ecx, [number1]
                                   add   ecx, [number2]
 
