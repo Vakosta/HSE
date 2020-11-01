@@ -64,8 +64,7 @@ section '.code' code readable executable
 
                                   mov   [number3], ecx
 
-                                  mov   ecx, 1
-                                  cmp   [is_yes], ecx
+                                  cmp   [is_yes], 1
                                   jne   comparison
 
                                   push  [number3]
