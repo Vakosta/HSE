@@ -41,7 +41,7 @@ section '.code' code readable executable
                                   call  [printf]
                                   add   esp, 8
 
-                                  push  is_yes
+                                  push  is_yes        ; Input user answer.
                                   push  format_number
                                   call  [scanf]
                                   add   esp, 8
@@ -52,17 +52,17 @@ section '.code' code readable executable
 
         process:                  inc   [counter]
 
-                                  xor   ecx, ecx
+                                  xor   ecx, ecx.      ; Number1 and number2 sum.
                                   add   ecx, [number1]
                                   add   ecx, [number2]
 
-                                  mov   ebx, [number2]
+                                  mov   ebx, [number2] ; Copy number2 into number1.
                                   mov   [number1], ebx
 
-                                  mov   ebx, [number3]
+                                  mov   ebx, [number3] ; Copy number3 into number2.
                                   mov   [number2], ebx
 
-                                  mov   [number3], ecx
+                                  mov   [number3], ecx ; Copy number1 and number2 sum to number3.
 
                                   cmp   [is_yes], 1
                                   jne   comparison
