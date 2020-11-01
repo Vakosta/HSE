@@ -3,13 +3,13 @@ entry start
 include 'win32a.inc'
 
 section '.data' data readable writable
-        string_extra_output       db 'Want to have extra output?', 10, 0
-        string_yes_no             db '1 -- yes, else -- no: ', 0
+        string_extra_output       db "Want to have extra output?", 10, 0
+        string_yes_no             db "1 -- yes, else -- no: ", 0
         string_element            db "%d'th element is %d.", 10, 0
-        string_amount_of_elements db 10, 'The number of elements of the Padovan sequence: %d.', 10, 0
-        string_max_element        db 'The max element is: %d.', 0
+        string_amount_of_elements db 10, "The number of elements of the Padovan sequence: %d.", 10, 0
+        string_max_element        db "The max element is: %d.", 0
 
-        format_number             db '%d', 0
+        format_number             db "%d", 0
 
         is_yes                    dd ?
         counter                   dd 3
@@ -102,13 +102,13 @@ section '.code' code readable executable
 
 
 section '.idata' import data readable
-        library            kernel,      'kernel32.dll',\
-                           msvcrt,      'msvcrt.dll'
+        library                   kernel,      "kernel32.dll",\
+                                  msvcrt,      "msvcrt.dll"
 
-        import             kernel,\
-                           ExitProcess, 'ExitProcess'
+        import                    kernel,\
+                                  ExitProcess, "ExitProcess"
 
-        import             msvcrt,\
-                           printf,      'printf',\
-                           getch,       '_getch',\
-                           scanf,       'scanf'
+        import                    msvcrt,\
+                                  printf,      "printf",\
+                                  getch,       "_getch",\
+                                  scanf,       "scanf"
