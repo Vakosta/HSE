@@ -143,32 +143,32 @@ cpp/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/cpp.dir/build.make CMakeFiles/cpp.dir/build
 .PHONY : cpp/fast
 
-main.o: main.cpp.o
+hw3/main.o: hw3/main.cpp.o
 
-.PHONY : main.o
+.PHONY : hw3/main.o
 
 # target to build an object file
-main.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/cpp.dir/build.make CMakeFiles/cpp.dir/main.cpp.o
-.PHONY : main.cpp.o
+hw3/main.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/cpp.dir/build.make CMakeFiles/cpp.dir/hw3/main.cpp.o
+.PHONY : hw3/main.cpp.o
 
-main.i: main.cpp.i
+hw3/main.i: hw3/main.cpp.i
 
-.PHONY : main.i
+.PHONY : hw3/main.i
 
 # target to preprocess a source file
-main.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/cpp.dir/build.make CMakeFiles/cpp.dir/main.cpp.i
-.PHONY : main.cpp.i
+hw3/main.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/cpp.dir/build.make CMakeFiles/cpp.dir/hw3/main.cpp.i
+.PHONY : hw3/main.cpp.i
 
-main.s: main.cpp.s
+hw3/main.s: hw3/main.cpp.s
 
-.PHONY : main.s
+.PHONY : hw3/main.s
 
 # target to generate assembly for a file
-main.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/cpp.dir/build.make CMakeFiles/cpp.dir/main.cpp.s
-.PHONY : main.cpp.s
+hw3/main.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/cpp.dir/build.make CMakeFiles/cpp.dir/hw3/main.cpp.s
+.PHONY : hw3/main.cpp.s
 
 # Help Target
 help:
@@ -179,9 +179,9 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... cpp"
-	@echo "... main.o"
-	@echo "... main.i"
-	@echo "... main.s"
+	@echo "... hw3/main.o"
+	@echo "... hw3/main.i"
+	@echo "... hw3/main.s"
 .PHONY : help
 
 

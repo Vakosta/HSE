@@ -8,30 +8,41 @@ int n;
 vector<vector<int>> matrix;
 vector<thread> threads;
 
-int determinant(vector<vector<int>> Matrix) {
+/**
+ * Считает определитель переданной матрицы.
+ *
+ * @param lMatrix Матрица, для которой требуется посчитать определитель.
+ * @return Полученный определитель.
+ */
+int determinant(vector<vector<int>> lMatrix) {
     int det = 0;
-    if (Matrix.size() == 1) {
-        return Matrix[0][0];
-    } else if (Matrix.size() == 2) {
-        det = (Matrix[0][0] * Matrix[1][1] - Matrix[0][1] * Matrix[1][0]);
+    if (lMatrix.size() == 1) {
+        return lMatrix[0][0];
+    } else if (lMatrix.size() == 2) {
+        det = (lMatrix[0][0] * lMatrix[1][1] - lMatrix[0][1] * lMatrix[1][0]);
         return det;
     } else {
-        for (int p = 0; p < Matrix[0].size(); p++) {
+        for (int p = 0; p < lMatrix[0].size(); p++) {
             vector<vector<int>> TempMatrix;
-            for (int i = 1; i < Matrix.size(); i++) {
+            for (int i = 1; i < lMatrix.size(); i++) {
                 vector<int> tempRow;
-                for (int j = 0; j < Matrix[i].size(); j++)
+                for (int j = 0; j < lMatrix[i].size(); j++)
                     if (j != p)
-                        tempRow.push_back(Matrix[i][j]);
+                        tempRow.push_back(lMatrix[i][j]);
                 if (!tempRow.empty())
                     TempMatrix.push_back(tempRow);
             }
-            det = det + Matrix[0][p] * pow(-1, p) * determinant(TempMatrix);
+            det = det + lMatrix[0][p] * pow(-1, p) * determinant(TempMatrix);
         }
         return det;
     }
 }
 
+/**
+ * Транспонирует матрицу.
+ *
+ * @param currentMatrix Матрица, которую требуется транспонировать.
+ */
 void transpose(vector<vector<int>> &currentMatrix) {
     vector<vector<int>> transpose;
 
@@ -48,6 +59,14 @@ void transpose(vector<vector<int>> &currentMatrix) {
     currentMatrix = transpose;
 }
 
+/**
+ * Считает минор для элемента по соответствующим координатам.
+ *
+ * @param minors Матрица миноров, переданная по ссылке, в которую
+ *               будут вноситься все изменения.
+ * @param x      Координата x элемента.
+ * @param y      Координата y элемента.
+ */
 void countMinor(vector<vector<int>> &minors, int x, int y) {
     vector<vector<int>> result;
 
@@ -67,7 +86,7 @@ void countMinor(vector<vector<int>> &minors, int x, int y) {
     minors[y][x] = ((y + x) % 2 == 0 ? 1 : -1) * determinant(result);
 }
 
-int main(int argc, char *argv[]) {
+int main() {
     cout.precision(3);
     cout << "Введите количество столбцов и строк матрицы: ";
     cin >> n;
@@ -115,7 +134,7 @@ int main(int argc, char *argv[]) {
     for (int i = 0; i < n; ++i) {
         cout << '\n';
         for (int j = 0; j < n; ++j)
-            cout << static_cast<double>(minors[i][j]) / d << ' ';
+            cout << static_cast<double>(minors[i][j]) / d << '\t';
     }
 
     return 0;
