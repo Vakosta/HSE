@@ -80,7 +80,7 @@
 				</MakeCommands>
 			</Target>
 		</Build>
-		<Unit filename="/Users/vakosta/CLionProjects/HSE/computing_architecture/cpp/hw3/main.cpp">
+		<Unit filename="/Users/vakosta/CLionProjects/HSE/computing_architecture/cpp/hw3/hw3.cpp">
 			<Option target="cpp"/>
 		</Unit>
 		<Unit filename="/Users/vakosta/CLionProjects/HSE/computing_architecture/cpp/CMakeLists.txt">

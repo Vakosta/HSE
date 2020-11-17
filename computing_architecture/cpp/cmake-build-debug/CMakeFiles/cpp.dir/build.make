@@ -77,27 +77,27 @@ include CMakeFiles/cpp.dir/progress.make
 # Include the compile flags for this target's objects.
 include CMakeFiles/cpp.dir/flags.make
 
-CMakeFiles/cpp.dir/hw3/main.cpp.o: CMakeFiles/cpp.dir/flags.make
-CMakeFiles/cpp.dir/hw3/main.cpp.o: ../hw3/main.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/vakosta/CLionProjects/HSE/computing_architecture/cpp/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/cpp.dir/hw3/main.cpp.o"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/cpp.dir/hw3/main.cpp.o -c /Users/vakosta/CLionProjects/HSE/computing_architecture/cpp/hw3/main.cpp
+CMakeFiles/cpp.dir/hw3/hw3.cpp.o: CMakeFiles/cpp.dir/flags.make
+CMakeFiles/cpp.dir/hw3/hw3.cpp.o: ../hw3/hw3.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/vakosta/CLionProjects/HSE/computing_architecture/cpp/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/cpp.dir/hw3/hw3.cpp.o"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/cpp.dir/hw3/hw3.cpp.o -c /Users/vakosta/CLionProjects/HSE/computing_architecture/cpp/hw3/hw3.cpp
 
-CMakeFiles/cpp.dir/hw3/main.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/cpp.dir/hw3/main.cpp.i"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/vakosta/CLionProjects/HSE/computing_architecture/cpp/hw3/main.cpp > CMakeFiles/cpp.dir/hw3/main.cpp.i
+CMakeFiles/cpp.dir/hw3/hw3.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/cpp.dir/hw3/hw3.cpp.i"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/vakosta/CLionProjects/HSE/computing_architecture/cpp/hw3/hw3.cpp > CMakeFiles/cpp.dir/hw3/hw3.cpp.i
 
-CMakeFiles/cpp.dir/hw3/main.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/cpp.dir/hw3/main.cpp.s"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/vakosta/CLionProjects/HSE/computing_architecture/cpp/hw3/main.cpp -o CMakeFiles/cpp.dir/hw3/main.cpp.s
+CMakeFiles/cpp.dir/hw3/hw3.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/cpp.dir/hw3/hw3.cpp.s"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/vakosta/CLionProjects/HSE/computing_architecture/cpp/hw3/hw3.cpp -o CMakeFiles/cpp.dir/hw3/hw3.cpp.s
 
 # Object files for target cpp
 cpp_OBJECTS = \
-"CMakeFiles/cpp.dir/hw3/main.cpp.o"
+"CMakeFiles/cpp.dir/hw3/hw3.cpp.o"
 
 # External object files for target cpp
 cpp_EXTERNAL_OBJECTS =
 
-cpp: CMakeFiles/cpp.dir/hw3/main.cpp.o
+cpp: CMakeFiles/cpp.dir/hw3/hw3.cpp.o
 cpp: CMakeFiles/cpp.dir/build.make
 cpp: CMakeFiles/cpp.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/Users/vakosta/CLionProjects/HSE/computing_architecture/cpp/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX executable cpp"

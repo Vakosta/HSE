@@ -143,32 +143,32 @@ cpp/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/cpp.dir/build.make CMakeFiles/cpp.dir/build
 .PHONY : cpp/fast
 
-hw3/main.o: hw3/main.cpp.o
+hw3/hw3.o: hw3/hw3.cpp.o
 
-.PHONY : hw3/main.o
+.PHONY : hw3/hw3.o
 
 # target to build an object file
-hw3/main.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/cpp.dir/build.make CMakeFiles/cpp.dir/hw3/main.cpp.o
-.PHONY : hw3/main.cpp.o
+hw3/hw3.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/cpp.dir/build.make CMakeFiles/cpp.dir/hw3/hw3.cpp.o
+.PHONY : hw3/hw3.cpp.o
 
-hw3/main.i: hw3/main.cpp.i
+hw3/hw3.i: hw3/hw3.cpp.i
 
-.PHONY : hw3/main.i
+.PHONY : hw3/hw3.i
 
 # target to preprocess a source file
-hw3/main.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/cpp.dir/build.make CMakeFiles/cpp.dir/hw3/main.cpp.i
-.PHONY : hw3/main.cpp.i
+hw3/hw3.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/cpp.dir/build.make CMakeFiles/cpp.dir/hw3/hw3.cpp.i
+.PHONY : hw3/hw3.cpp.i
 
-hw3/main.s: hw3/main.cpp.s
+hw3/hw3.s: hw3/hw3.cpp.s
 
-.PHONY : hw3/main.s
+.PHONY : hw3/hw3.s
 
 # target to generate assembly for a file
-hw3/main.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/cpp.dir/build.make CMakeFiles/cpp.dir/hw3/main.cpp.s
-.PHONY : hw3/main.cpp.s
+hw3/hw3.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/cpp.dir/build.make CMakeFiles/cpp.dir/hw3/hw3.cpp.s
+.PHONY : hw3/hw3.cpp.s
 
 # Help Target
 help:
@@ -179,9 +179,9 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... cpp"
-	@echo "... hw3/main.o"
-	@echo "... hw3/main.i"
-	@echo "... hw3/main.s"
+	@echo "... hw3/hw3.o"
+	@echo "... hw3/hw3.i"
+	@echo "... hw3/hw3.s"
 .PHONY : help
 
 

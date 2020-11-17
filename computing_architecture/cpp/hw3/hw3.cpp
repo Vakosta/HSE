@@ -88,8 +88,14 @@ void countMinor(vector<vector<int>> &minors, int x, int y) {
 
 int main() {
     cout.precision(3);
+
     cout << "Введите количество столбцов и строк матрицы: ";
     cin >> n;
+    if (n <= 0) {
+        cout << "Повторите запуск и введите корректное значение.";
+        return 0;
+    }
+
     cout << "Введите матрицу:" << '\n';
 
     for (int i = 0; i < n; ++i) {
@@ -101,7 +107,12 @@ int main() {
             matrix[i].push_back(value);
         }
     }
+
     long d = determinant(matrix);
+    if (d == 0) {
+        cout << "Определитель равен 0, обратной матрицы не существует.";
+        return 0;
+    }
 
     cout << "Матрица получена." << "\n"
          << "Определитель матрицы = " << d << "." << "\n\n"
