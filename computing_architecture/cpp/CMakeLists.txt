@@ -3,4 +3,4 @@ project(Comparch)
 
 set(CMAKE_CXX_STANDARD 20)
 
-add_executable(cpp hw3/main.cpp)
+add_executable(cpp hw3/hw3.cpp)
