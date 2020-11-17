@@ -1,0 +1,3 @@
+/Users/vakosta/CLionProjects/HSE/computing_architecture/cpp/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/Users/vakosta/CLionProjects/HSE/computing_architecture/cpp/cmake-build-debug/CMakeFiles/edit_cache.dir
+/Users/vakosta/CLionProjects/HSE/computing_architecture/cpp/cmake-build-debug/CMakeFiles/cpp.dir
