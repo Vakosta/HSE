@@ -11,7 +11,7 @@ vector<thread> threads;
 /**
  * Считает определитель переданной матрицы.
  *
- * @param lMatrix Матрица, для которой требуется посчитать определитель.
+ * @param  lMatrix Матрица, для которой требуется посчитать определитель.
  * @return Полученный определитель.
  */
 int determinant(vector<vector<int>> lMatrix) {
