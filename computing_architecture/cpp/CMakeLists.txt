@@ -6,4 +6,4 @@ set(CMAKE_CXX_STANDARD 20)
 include_directories("/usr/local/include" "/usr/local/opt/llvm/include")
 link_directories("/usr/local/lib" "/usr/local/opt/llvm/lib")
 
-add_executable(cpp hw4/hw4.cpp)
+add_executable(cpp micro2/micro2.cpp)
