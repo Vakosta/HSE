@@ -9,6 +9,8 @@ class Fork;
 
 vector<Fork> forks;
 
+mutex print_mutex;
+
 class Fork {
 private:
     mutable mutex mtx;
@@ -29,29 +31,52 @@ public:
     }
 };
 
+void printFork(int philosopher, int fork) {
+    print_mutex.lock();
+    cout << "Философ №" << philosopher << " взял вилку №" << fork << endl;
+    print_mutex.unlock();
+}
+
+void printStartEating(int philosopher, int duration) {
+    print_mutex.lock();
+    cout << "Философ №" << philosopher << " приступил к трапезе на " << duration << " мс" << endl;
+    print_mutex.unlock();
+}
+
+void printEndEating(int philosopher) {
+    print_mutex.lock();
+    cout << "Философ №" << philosopher << " закончил трапезу" << endl;
+    print_mutex.unlock();
+}
+
 void eat(int numberOfPhilosopher) {
     int counter = 0;
+    chrono::duration<long long int, milli> milliseconds = chrono::milliseconds(
+            2000 + (rand() % static_cast<int>(6000 - 2000 + 1)));
     while (counter < 100) {
         if (numberOfPhilosopher == 4) {
             forks[0].getFork();
-            cout << "Философ №" << numberOfPhilosopher << " взял вилку №" << 0 << endl;
+            printFork(numberOfPhilosopher, 0);
 
             forks[numberOfPhilosopher].getFork();
-            cout << "Философ №" << numberOfPhilosopher << " взял вилку №" << numberOfPhilosopher << endl;
+            printFork(numberOfPhilosopher, numberOfPhilosopher);
 
-            cout << numberOfPhilosopher << endl;
-            this_thread::sleep_for(chrono::milliseconds(800 + (rand() % static_cast<int>(2000 - 800 + 1))));
+            printStartEating(numberOfPhilosopher, milliseconds.count());
+            this_thread::sleep_for(milliseconds);
+            printEndEating(numberOfPhilosopher);
 
             forks[0].putFork();
             forks[numberOfPhilosopher].putFork();
         } else {
             forks[numberOfPhilosopher].getFork();
-            cout << "Философ №" << numberOfPhilosopher << " взял вилку №" << numberOfPhilosopher << endl;
+            printFork(numberOfPhilosopher, numberOfPhilosopher);
 
             forks[numberOfPhilosopher + 1].getFork();
-            cout << "Философ №" << numberOfPhilosopher << " взял вилку №" << numberOfPhilosopher + 1 << endl;
+            printFork(numberOfPhilosopher, numberOfPhilosopher + 1);
 
-            this_thread::sleep_for(chrono::milliseconds(500));
+            printStartEating(numberOfPhilosopher, milliseconds.count());
+            this_thread::sleep_for(milliseconds);
+            printEndEating(numberOfPhilosopher);
 
             forks[numberOfPhilosopher].putFork();
             forks[numberOfPhilosopher + 1].putFork();
@@ -62,6 +87,8 @@ void eat(int numberOfPhilosopher) {
 }
 
 int main() {
+    srand(std::chrono::duration_cast<std::chrono::seconds>(
+            std::chrono::system_clock::now().time_since_epoch()).count());
     for (int i = 0; i < 5; ++i)
         forks.emplace_back();
 
