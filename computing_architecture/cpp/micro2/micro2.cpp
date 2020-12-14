@@ -8,7 +8,6 @@ using namespace std;
 class Fork;
 
 vector<Fork> forks;
-
 mutex print_mutex;
 
 class Fork {
@@ -16,7 +15,7 @@ private:
     mutable mutex mtx;
 
 public:
-    Fork() {}
+    Fork() = default;
 
     Fork(Fork const &other) {
         unique_lock<mutex> lock_other(other.mtx);
@@ -33,56 +32,49 @@ public:
 
 void printFork(int philosopher, int fork) {
     print_mutex.lock();
-    cout << "Философ №" << philosopher << " взял вилку №" << fork << endl;
+    cout << "Философ №" << philosopher + 1 << " взял вилку №" << fork + 1 << endl;
     print_mutex.unlock();
 }
 
 void printStartEating(int philosopher, int duration) {
     print_mutex.lock();
-    cout << "Философ №" << philosopher << " приступил к трапезе на " << duration << " мс" << endl;
+    cout << "Философ №" << philosopher + 1 << " приступил к трапезе на " << duration << " мс" << endl;
     print_mutex.unlock();
 }
 
 void printEndEating(int philosopher) {
     print_mutex.lock();
-    cout << "Философ №" << philosopher << " закончил трапезу" << endl;
+    cout << "Философ №" << philosopher + 1 << " закончил трапезу" << endl;
     print_mutex.unlock();
 }
 
 void eat(int numberOfPhilosopher) {
     int counter = 0;
-    chrono::duration<long long int, milli> milliseconds = chrono::milliseconds(
-            2000 + (rand() % static_cast<int>(6000 - 2000 + 1)));
     while (counter < 100) {
-        if (numberOfPhilosopher == 4) {
-            forks[0].getFork();
-            printFork(numberOfPhilosopher, 0);
+        int index1, index2;
+        if (numberOfPhilosopher == 4)
+            index1 = 0, index2 = numberOfPhilosopher;
+        else
+            index1 = numberOfPhilosopher, index2 = numberOfPhilosopher + 1;
 
-            forks[numberOfPhilosopher].getFork();
-            printFork(numberOfPhilosopher, numberOfPhilosopher);
+        int minDuration = 1000, maxDuration = 5000;
+        chrono::duration<long long int, milli> milliseconds = chrono::milliseconds(
+                minDuration + (rand() % static_cast<int>(maxDuration - minDuration + 1)));
 
-            printStartEating(numberOfPhilosopher, milliseconds.count());
-            this_thread::sleep_for(milliseconds);
-            printEndEating(numberOfPhilosopher);
+        forks[index1].getFork();
+        printFork(numberOfPhilosopher, index1);
+        forks[index2].getFork();
+        printFork(numberOfPhilosopher, index2);
 
-            forks[0].putFork();
-            forks[numberOfPhilosopher].putFork();
-        } else {
-            forks[numberOfPhilosopher].getFork();
-            printFork(numberOfPhilosopher, numberOfPhilosopher);
+        printStartEating(numberOfPhilosopher, milliseconds.count());
+        this_thread::sleep_for(milliseconds);
+        printEndEating(numberOfPhilosopher);
 
-            forks[numberOfPhilosopher + 1].getFork();
-            printFork(numberOfPhilosopher, numberOfPhilosopher + 1);
+        forks[index1].putFork();
+        forks[index2].putFork();
 
-            printStartEating(numberOfPhilosopher, milliseconds.count());
-            this_thread::sleep_for(milliseconds);
-            printEndEating(numberOfPhilosopher);
-
-            forks[numberOfPhilosopher].putFork();
-            forks[numberOfPhilosopher + 1].putFork();
-        }
-        counter++;
         this_thread::sleep_for(chrono::milliseconds(10));
+        counter++;
     }
 }
 
