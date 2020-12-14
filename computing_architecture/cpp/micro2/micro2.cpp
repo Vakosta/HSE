@@ -90,7 +90,7 @@ void eat(int numberOfPhilosopher, int maxIterations, int randomMin, int randomMa
     int counter = 0;
     while (counter < maxIterations) {
         int index1, index2;
-        if (numberOfPhilosopher == 4)
+        if (numberOfPhilosopher == philosophers.size() - 1)
             index1 = 0, index2 = numberOfPhilosopher;
         else
             index1 = numberOfPhilosopher, index2 = numberOfPhilosopher + 1;
@@ -116,20 +116,21 @@ void eat(int numberOfPhilosopher, int maxIterations, int randomMin, int randomMa
 }
 
 int main(int argc, char *argv[]) {
-    string maxIterations(argv[1]);
-    string randomMin(argv[2]);
-    string randomMax(argv[3]);
+    string countOfPhilosophers(argv[1]);
+    string maxIterations(argv[2]);
+    string randomMin(argv[3]);
+    string randomMax(argv[4]);
 
     srand(chrono::duration_cast<chrono::seconds>(
             chrono::system_clock::now().time_since_epoch()).count());
 
-    for (int i = 0; i < 5; ++i)
+    for (int i = 0; i < stoi(countOfPhilosophers); ++i)
         forks.emplace_back();
 
-    for (int i = 0; i < 5; ++i)
+    for (int i = 0; i < stoi(countOfPhilosophers); ++i)
         philosophers.emplace_back(eat, i, stoi(maxIterations), stoi(randomMin), stoi(randomMax));
 
-    for (int i = 0; i < 5; ++i)
+    for (int i = 0; i < stoi(countOfPhilosophers); ++i)
         philosophers[i].join();
 
     return 0;
