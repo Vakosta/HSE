@@ -110,7 +110,7 @@ void eat(int numberOfPhilosopher, int maxIterations, int randomMin, int randomMa
         forks[index1].putFork();
         forks[index2].putFork();
 
-        this_thread::sleep_for(chrono::milliseconds(10));
+        this_thread::sleep_for(chrono::milliseconds(5));
         counter++;
     }
 }
@@ -121,15 +121,19 @@ int main(int argc, char *argv[]) {
     string randomMin(argv[3]);
     string randomMax(argv[4]);
 
+    /// ID для рандома в качестве текущего времени.
     srand(chrono::duration_cast<chrono::seconds>(
             chrono::system_clock::now().time_since_epoch()).count());
 
+    /// Создаются вилки.
     for (int i = 0; i < stoi(countOfPhilosophers); ++i)
         forks.emplace_back();
 
+    /// Создаются потоки с философами.
     for (int i = 0; i < stoi(countOfPhilosophers); ++i)
         philosophers.emplace_back(eat, i, stoi(maxIterations), stoi(randomMin), stoi(randomMax));
 
+    /// Ожидание завершения потоков с философами.
     for (int i = 0; i < stoi(countOfPhilosophers); ++i)
         philosophers[i].join();
 
