@@ -4,3 +4,6 @@ ida/.ipynb_checkpoints/HW2-checkpoint.ipynb
 ida/.ipynb_checkpoints/HW4-checkpoint.ipynb
 ida/HW1/.ipynb_checkpoints/HW1-checkpoint.ipynb
 ida/HW3/.ipynb_checkpoints/HW3-checkpoint.ipynb
+.idea
+out
+*.iml
